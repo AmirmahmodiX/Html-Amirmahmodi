@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>ماشین حساب امیرمحمد محمودی</title>
+<style>
+    
+    body {
+        font-family: sans-serif;
+        text-align: center;
+        direction: rtl;
+    }
+    input {
+        font-size: 30px;
+        border: 3px solid ;
+        text-align: center;
+    }
+    .btn {
+        width: 60px;
+        height: 50px;
+        margin: 10px;
+        font-size: 30px;
+        border: 3px solid ;
+        background: white;
+        cursor: pointer;
+    }
+    #resultBox {
+        border: 3px solid ;
+        padding: 15px;
+        width: 300px;
+        font-size: 30px;
+        display: inline-block;
+       
+    }
+</style>
+</head>
+<body>
+
+<h2>ماشین حساب امیرمحمد محمودی</h2> <br>
+
+<input id="num1" type="number" placeholder="عدداول">
+<br><br>
+<input id="num2" type="number" placeholder="عدد دوم">
+<br><br>
+
+<button class="btn" onclick="calc('+')">+</button>
+<button class="btn" onclick="calc('-')">-</button>
+<button class="btn" onclick="calc('/')">/</button>
+<button class="btn" onclick="calc('*')">*</button>
+<button class="btn" onclick="calc('%')">%</button>
+<br><br>
+<div id="resultBox">نتیجه</div>
+
+<script>
+    // قسمت بالا و اینجا از calc استفاده کردم که میشه باهاش از تابع ها مثل جمع تفریق تقسیمو اینا میشه ازش استفاده کرد
+function calc(op) {
+    //parse float رو فکر کنم درس ندادید و کارش تبدیل اعداد به اعشاریه برای بهتر شدن کد اضافه کردم
+    let a = parseFloat(document.getElementById("num1").value);
+    let b = parseFloat(document.getElementById("num2").value);
+    let result;
+//اینجا  a و b رو تغریف کردیم برای اعداد و برای اینکه جای خالی نزارن یا هر چیز دیگه ای از این کد استفاده میکنیم
+    if (isNaN(a) || isNaN(b)) {
+        document.getElementById("resultBox").innerHTML = "اعداد نامعتبر!";
+        // return برای اینکه همینجا بسته بشه یعنی دیگه تابع اجرا نشه
+        return;
+    }
+// اینجا محاسبه میشه
+    switch (op) {
+        case '+': result = a + b; break;
+        case '-': result = a - b; break;
+        case '*': result = a * b; break;
+        // تو ماشین حساب عدد نمیتونه تقسیم بر صفر بشه پس برای این هم تعریف میکنیم که چه خطایی نمایش بده
+        case '/':
+            if (b === 0) {
+                result = "تقسیم بر صفر ممکن نیست!";
+            } else {
+                result = a / b;
+            }
+            break;
+        case '%': result = a % b; break;
+    }
+
+    document.getElementById("resultBox").innerHTML = "نتیجه: " + result;
+}
+</script>
+
+</body>
+</html>
